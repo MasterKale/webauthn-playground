@@ -1,0 +1,21 @@
+{
+  "name": "@webauthn/example-api",
+  "version": "0.1.3",
+  "main": "index.js",
+  "engines": {
+    "node": "10.14.1"
+  },
+  "scripts": {
+    "start": "nodemon --inspect -w . index.js",
+    "prod": "node index.js"
+  },
+  "dependencies": {
+    "@webauthn/server": "^0.1.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "nanoid": "^2.1.8",
+    "nodemon": "^1.18.10",
+    "spdy": "^4.0.0"
+  }
+}
