@@ -36,7 +36,7 @@ app.post('/request-register', (req, res) => {
 
   if (existingUser) {
     console.info('user exists, exiting');
-    return res.sendStatus(400);
+    return res.status(400).send({ msg: 'user already exists' });
   }
 
   const challengeResponse = generateRegistrationChallenge({
@@ -59,7 +59,7 @@ app.post('/register', (req, res) => {
   const user = userRepository.findByChallenge(challenge);
 
   if (!user) {
-    return res.sendStatus(400);
+    return res.status(400).send({ msg: `could not find user by challenge: ${challenge}` });
   }
 
   userRepository.addKeyToUser(user, key);
@@ -73,7 +73,7 @@ app.post('/login', (req, res) => {
   const user = userRepository.findByEmail(email);
 
   if (!user) {
-    return res.sendStatus(400);
+    return res.status(400).send({ msg: `could not find user by email: ${email}` });
   }
 
   const assertionChallenge = generateLoginChallenge(user.key);
@@ -89,12 +89,12 @@ app.post('/login-challenge', (req, res) => {
   console.log('challenge:', challenge);
 
   if (!challenge) {
-    return res.sendStatus(400);
+    return res.status(400).send({ msg: 'could not parse challenge' });
   }
   const user = userRepository.findByChallenge(challenge);
 
   if (!user || !user.key || user.key.credID !== keyId) {
-    return res.sendStatus(400);
+    return res.status(400).send({ msg: `could not identify user: ${user}` });
   }
 
   const loggedIn = verifyAuthenticatorAssertion(req.body, user.key);
