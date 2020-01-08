@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Server",
       "runtimeExecutable": "npm",
-      "runtimeVersion": "10.14.1",
+      "runtimeVersion": "10.18.0",
       "runtimeArgs": [
         "run-script",
         "start"
